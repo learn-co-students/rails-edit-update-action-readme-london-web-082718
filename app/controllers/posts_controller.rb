@@ -3,13 +3,15 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def new
+    @post = Post.new
+  end
+
   def show
     @post = Post.find(params[:id])
   end
 
-  def new
-    @post = Post.new
-  end
+
 
   def create
     @post = Post.new
@@ -20,4 +22,21 @@ class PostsController < ApplicationController
   end
 
   # add edit and update methods here
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+
+    @post = Post.find(params[:id])
+    # @post.update(title: params[:post][:title], description: params[:post][:description])
+
+    @post.update(params[:post])     # quicker way than defining each parameter, e.g. title, descriptions alone
+    redirect_to post_path(@post)
+  end
+
+
+
+
 end
